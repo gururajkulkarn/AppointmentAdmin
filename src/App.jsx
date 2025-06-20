@@ -1,14 +1,40 @@
-import React from 'react'
-import Login from './pages/Login'
+import React, { useContext } from "react";
+import Login from "./pages/Login";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AdminContext } from "./context/AdminContext";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import { Routes, Route } from "react-router-dom";
+import DoctorsList from "./pages/Admin/DoctorsList";
+import AllApointments from "./pages/Admin/AllApointments";
+import DashBoard from "./pages/Admin/DashBoard";
+import AddDoctor from "./pages/Admin/AddDoctor";
 
 const App = () => {
-  return (
-    <div>
+  const { aToken } = useContext(AdminContext);
 
-<Login/>
-
+  return aToken ? (
+    <div className="bg-[#F8F9FD]">
+      <ToastContainer />
+      <Navbar />
+      <div className="flex items-start">
+        <Sidebar />
+        <Routes>
+          <Route path="/" element={<></>} />
+          <Route path="/admin-dashboard" element={<DashBoard />} />
+          <Route path="/all-appointments" element={<AllApointments />} />
+          <Route path="/add-doctors" element={<AddDoctor />} />
+          <Route path="/doctor-list" element={<DoctorsList />} />
+        </Routes>
+      </div>
     </div>
-  )
-}
+  ) : (
+    <>
+      <Login />
+      <ToastContainer />
+    </>
+  );
+};
 
 export default App;
