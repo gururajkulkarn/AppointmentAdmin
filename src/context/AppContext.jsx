@@ -1,18 +1,35 @@
-import {createContext} from 'react';
+import { createContext } from "react";
 
-export const AppContext = createContext()
-
+export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
+
+
+  const CaluclateAge = (dob) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    return age;
+  };
+
+ const months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    // Function to format the slot date
+    const slotDateFormate = (slotDate) => {
+      const dateArray = slotDate.split('_')
+      return dateArray[0]+ " " + months[Number(dateArray[1])] + " " + dateArray[2];
+    }
+
+
   const value = {
-    // Define any state or functions you want to provide to the context
+    CaluclateAge,
+    slotDateFormate
   };
 
   return (
-    <AppContext.Provider value={value}>
-      {props.children}
-    </AppContext.Provider>
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );
-}
+};
 
 export default AppContextProvider;
