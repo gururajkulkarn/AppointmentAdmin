@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useContext } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { assets } from "../../assets/assets";
-import {AppContext} from '../../context/AppContext'
+import { AppContext } from "../../context/AppContext";
 
 const DashBoard = () => {
-  const { aToken, getDashData, dashData, cancelAppointment } = useContext(AdminContext);
+  const { aToken, getDashData, dashData, cancelAppointment } =
+    useContext(AdminContext);
 
-  const {slotDateFormate} = useContext(AppContext)
+  const { slotDateFormate } = useContext(AppContext);
 
   useEffect(() => {
     if (aToken) {
@@ -78,19 +79,22 @@ const DashBoard = () => {
                     <p className="text-lg font-medium text-gray-800">
                       {item.docData.name}
                     </p>
-                    <p className="text-sm text-gray-500">{slotDateFormate(item.slotDate)}</p>
+                    <p className="text-sm text-gray-500">
+                      {slotDateFormate(item.slotDate)}
+                    </p>
                   </div>
                 </div>
                 <div>
                   {item.cancelled ? (
-                    <p className="text-red-500 font-semibold">Cancelled</p>
+                    <p className="text-red-400 font-medium">Cancelled</p>
+                  ) : item.isCompleted ? (
+                    <p className="text-green-400 font-medium">Completed</p>
                   ) : (
                     <img
                       onClick={() => cancelAppointment(item._id)}
-                      className="w-8 h-8 cursor-pointer hover:scale-105 transition"
+                      className="w-10 cursor-pointer"
                       src={assets.cancel_icon}
-                      alt="Cancel"
-                      title="Cancel Appointment"
+                      alt="cancel"
                     />
                   )}
                 </div>

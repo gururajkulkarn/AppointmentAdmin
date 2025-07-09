@@ -2,18 +2,39 @@ import React, { useContext } from 'react';
 import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { AdminContext } from '../context/AdminContext';
+import { DoctorContext } from '../context/DoctorContext';
 
 const Navbar = () => {
   const { aToken, setAToken } = useContext(AdminContext);
+  const {dtoken, setDtoken} = useContext(DoctorContext)
   const navigate = useNavigate();
 
-  const logout = () => {
-    navigate('/');
-    // Clear the token from local storage and context
-    aToken && setAToken('');
-   aToken && localStorage.removeItem('atoken');
+  // const logout = () => {
+  //   navigate('/');
+  //   // Clear the token from local storage and context
+  //   aToken && setAToken('');
+  //  aToken && localStorage.removeItem('atoken');
+  //   dtoken && setDtoken('');
+  //  dtoken && localStorage.removeItem('dtoken');
    
+  // }
+
+  const logout = () => {
+  if (aToken) {
+    localStorage.removeItem('atoken');
+    setAToken('');
   }
+
+  if (dtoken) {
+    localStorage.removeItem('dtoken');
+    setDtoken('');
+  }
+
+
+  // After clearing tokens, redirect
+  navigate('/');
+};
+
 
   return (
     <nav className="bg-white shadow-md px-6 py-4 flex items-center justify-between">

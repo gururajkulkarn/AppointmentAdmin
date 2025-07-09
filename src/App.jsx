@@ -17,9 +17,9 @@ import DoctorProfile from './pages/Doctor/DoctorProfile'
 
 const App = () => {
   const { aToken } = useContext(AdminContext);
-  const { dToken } = useContext(DoctorContext)
+  const { dtoken } = useContext(DoctorContext)
 
-  return aToken || dToken ? (
+  return aToken || dtoken ? (
     <div className="bg-[#F8F9FD]">
       <ToastContainer />
       <Navbar />
