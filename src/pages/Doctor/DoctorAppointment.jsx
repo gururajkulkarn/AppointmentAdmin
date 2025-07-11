@@ -11,6 +11,7 @@ const DoctorAppointment = () => {
     cancelAppointment,
     completeAppointment,
   } = useContext(DoctorContext);
+  
   const { CaluclateAge, slotDateFormate } = useContext(AppContext);
 
   useEffect(() => {
@@ -67,21 +68,21 @@ const DoctorAppointment = () => {
               <p className="hidden lg:block">₹{item.amount}</p>
 
               {item.cancelled ? (
-                <p className="text-red-600 text-xs font-medium">Cancelled</p>
+                <p className="text-red-600 text-xs font-medium text-[15px]">Cancelled</p>
               ) : item.isCompleted ? (
-                <p className="text-green-600 text-xs font-medium">Completed</p>
+                <p className="text-green-600 text-xs font-medium text-[15px]">Completed</p>
               ) : (
                 <div className="flex gap-2 items-center">
                   <img
                     src={assets.cancel_icon}
                     alt="Cancel"
-                    className="w-5 h-5 cursor-pointer"
+                    className="w-15 h-15 cursor-pointer"
                     onClick={() => cancelAppointment(item._id)}
                   />
                   <img
                     src={assets.tick_icon}
                     alt="Complete"
-                    className="w-5 h-5 cursor-pointer"
+                    className="w-8 h-8 cursor-pointer"
                     onClick={() => completeAppointment(item._id)}
                   />
                 </div>

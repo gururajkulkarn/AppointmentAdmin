@@ -16,8 +16,7 @@ const [fees, setFees] = useState("");
 const [speciality, setSpeciality] = useState('General physician');
 const [degree, setDegree] = useState("");
 const [about, setAbout] = useState("");
-const [address1, setAddress1] = useState("");
-const [address2, setAddress2] = useState("");
+const [address, setAddress] = useState("");
 
 const { backendUrl, aToken} = useContext(AdminContext)
 
@@ -39,13 +38,9 @@ try{
   formData.append('about',about)
   formData.append('speciality',speciality)
   formData.append('degree',degree)
-  formData.append('address',JSON.stringify({line1:address1,line2:address2}))
+  formData.append('address',address)
 
-  // console log FormData
 
-  formData.forEach((value,key)=>{
-    console.log(`${key}: ${value}`)
-  })
 
   const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, { headers: {aToken}})
 
@@ -55,8 +50,7 @@ try{
     setName('')
     setPassword('')
     setEmail('')
-    setAddress1('')
-    setAddress2('')
+    setAddress('')
     setAbout('')
     setDegree('')
     setExperience('')
@@ -231,40 +225,21 @@ catch (error){
         {/* Address 1 */}
         <div>
           <label
-            htmlFor="address1"
+            htmlFor="address"
             className="block text-gray-700 font-semibold mb-2"
           >
             Address 
           </label>
           <input
             type="text"
-            onChange={(e) => setAddress1(e.target.value)}
-            value={address1}
-            id="address1"
+            onChange={(e) => setAddress(e.target.value)}
+            value={address}
+            id="address"
             placeholder="Address"
             required
             className="w-full min-w-[280px] border border-gray-300 rounded-md px-2 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-        </div>
-
-        {/* Address 2 */}
-        <div>
-          <label
-            htmlFor="address2"
-            className="block text-gray-700 font-semibold mb-2"
-          >
-            Address 
-          </label>
-          <input
-            type="text"
-            onChange={(e) => setAddress2(e.target.value)}
-            value={address2}
-            id="address2"
-            placeholder="Address"
-            required
-            className="w-full min-w-[280px] border border-gray-300 rounded-md px-2 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
+        </div> 
 
         {/* About Doctor - full width */}
         <div className="md:col-span-4 mb-2">
@@ -289,7 +264,7 @@ catch (error){
       <div className="flex items-center justify-center ">
       <button
         type="submit"
-        className="w-70 bg-blue-600  text-white font-semibold py-4 rounded-md hover:bg-blue-700 transition-colors"
+        className="w-70 bg-blue-600 cursor-pointer text-white font-semibold py-4 rounded-md hover:bg-blue-700 transition-colors"
       >
         Add Doctor
       </button>
